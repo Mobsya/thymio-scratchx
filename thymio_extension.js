@@ -1597,7 +1597,7 @@
 
 
     // Check for GET param 'lang'
-    var paramString = ""; //window.location.search.replace(/^\?|\/$/g, '');
+    var paramString = window.location.search.replace(/^\?|\/$/g, '');
     var vars = paramString.split("&");
     var lang = 'fr';
     for (var i = 0; i < vars.length; i++) {
@@ -1656,8 +1656,6 @@
             ["b", "tap %n", "bump"],
             ["b", "object detected %m.sensors", "touching", "left"],
             ["b", "object detected %m.sensors %n", "touching_threshold", "left"]
-            /*,
-                  [" ", "reset", "reset"]*/
         ],
         fr: [
             ["w", "avancer %n", "scratch_move", 50],
@@ -1708,8 +1706,6 @@
             ["b", "choc %n", "bump"],
             ["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"]
-            /*,
-                  [" ", "reset", "reset"]*/
         ]
     };
 
