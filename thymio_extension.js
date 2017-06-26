@@ -1718,10 +1718,10 @@
             [" ", "motori %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "ferma motori", "scratch_stop"],
             [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
-            [" ", "accendi LED quadrante %m.leftright", "scratch_next_dial", "gauche"],
+            [" ", "accendi LED quadrante %m.leftright", "scratch_next_dial", "sinistro"],
             [" ", "accendi LED quadrante %n %n %n %n %n %n %n %n", "V_leds_circle", 0, 8, 16, 32, 0, 8, 16, 32],
             [" ", "spegni LED", "scratch_clear_leds"],
-            [" ", "colora LED %n %m.light", "scratch_set_leds", 0, "tout"],
+            [" ", "colora LED %n %m.light", "scratch_set_leds", 0, "tutti"],
             [" ", "cambia colore LED %n %m.light", "scratch_change_leds", 0, "all"],
             [" ", "suona nota %n per %n s", "A_sound_freq", 440, 1],
             [" ", "suona suono Thymio %m.sounds", "A_sound_system", 1],
@@ -1738,24 +1738,24 @@
             [" ", "LED RC %n", "emit", 1],
             ["r", "ricezione", "receive"],
             ["R", "ricezione", "temperature"],
-            ["r", "misura motori %m.leftright", "motor", "gauche"],
+            ["r", "misura motori %m.leftright", "motor", "sinistro"],
             /*["r", "moteur %m.leftright vitesse", "motor_speed", "gauche" ],
             ["r", "moteur %m.leftright target", "motor_target", "gauche" ],*/
-            ["r", "inclinazione %m.tilts", "tilt", "devant-derrière"],
+            ["r", "inclinazione %m.tilts", "tilt", "davanti-dietro"],
             ["r", "sensore prossimità %n", "proximity", 2],
-            ["r", "sensore prossimità %m.proxsensors", "proximity2", "devant extrême gauche"],
+            ["r", "sensore prossimità %m.proxsensors", "proximity2", "tutto a sinistra"],
             ["r", "sensore terreno %n", "ground", 0],
-            ["r", "distanza %m.sensors", "distance", "devant"],
-            ["r", "angolo %m.angles", "angle", "devant"],
+            ["r", "distanza %m.sensors", "distance", "davanti"],
+            ["r", "angolo %m.angles", "angle", "davanti"],
             ["r", "sensori di prossimità", "prox_horizontal"],
             ["r", "sensori di prossimità", "prox_ground_delta"],
             ["r", "livello sonoro", "mic_intensity"],
-            ["r", "colore LED %m.singlelight", "leds", "dessus"],
-            ["r", "isometria %m.odo", "odo", "direction"],
+            ["r", "colore LED %m.singlelight", "leds", "sopra"],
+            ["r", "isometria %m.odo", "odo", "direzione"],
             ["b", "rumore captato", "sound_detected"],
             ["b", "urto %n", "bump"],
-            ["b", "oggetto rilevato %m.sensors", "touching", "devant"],
-            ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "devant"]
+            ["b", "oggetto rilevato %m.sensors", "touching", "davanti"],
+            ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "davanti"]
         ]
     };
 
@@ -1791,12 +1791,12 @@
             leftright: ["sinistro", "destro"],
             sensors: ["davanti", "dietro", "terreno"],
             proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore destro", "posteriore sinistro"],
-            singlelight: ["superiore", "inferiore a sinistra", "inferiore a destra"],
+            singlelight: ["sopra", "sotto a sinistra", "sotto a destra"],
             light: ["tutti", "superiori", "inferiori", "inferiori a sinistra", "inferiori a destra"],
             angles: ["davanti", "dietro", "terreno"],
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direzione", "x", "y"],
-            tilts: ["frontale-posteriore", "superiore-inferiore", "sinistro-destro"]
+            tilts: ["davanti-dietro", "sopra-sotto", "sinistro-destro"]
 
         }
 
