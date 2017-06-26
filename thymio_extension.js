@@ -1709,7 +1709,7 @@
         ],
         it: [
             ["w", "avanza di %n", "scratch_move", 50],
-            ["w", "avanza di %n con velocità vitesse %n", "scratch_move_with_speed", 50, 50],
+            ["w", "avanza di %n con velocità %n", "scratch_move_with_speed", 50, 50],
             ["w", "avanza di %n in %n s", "scratch_move_with_time", 50, 1],
             ["w", "disegna un cerchio di raggio %n per %n gradi", "scratch_arc", 150, 45],
             ["w", "ruota di %n gradi", "scratch_turn", 45],
