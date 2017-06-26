@@ -1706,6 +1706,56 @@
             ["b", "choc %n", "bump"],
             ["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"]
+        ],
+        it: [
+            ["w", "avanza di %n", "scratch_move", 50],
+            ["w", "avanza di %n con velocità vitesse %n", "scratch_move_with_speed", 50, 50],
+            ["w", "avanza di %n in %n s", "scratch_move_with_time", 50, 1],
+            ["w", "disegna un cerchio di raggio %n per %n gradi", "scratch_arc", 150, 45],
+            ["w", "ruota di %n gradi", "scratch_turn", 45],
+            ["w", "ruota di %n gradi con velocità %n", "scratch_turn_with_speed", 90,50],
+            ["w", "ruota di %n gradi in %n s", "scratch_turn_with_time", 90,1],
+            [" ", "motori %m.leftrightall %n", "scratch_motor", "gauche", 50],
+            [" ", "ferma motori", "scratch_stop"],
+            [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
+            [" ", "accendi LED quadrante %m.leftright", "scratch_next_dial", "gauche"],
+            [" ", "accendi LED quadrante %n %n %n %n %n %n %n %n", "V_leds_circle", 0, 8, 16, 32, 0, 8, 16, 32],
+            [" ", "spegni LED", "scratch_clear_leds"],
+            [" ", "colora LED %n %m.light", "scratch_set_leds", 0, "tout"],
+            [" ", "cambia colore LED %n %m.light", "scratch_change_leds", 0, "all"],
+            [" ", "suona nota %n per %n s", "A_sound_freq", 440, 1],
+            [" ", "suona suono Thymio %m.sounds", "A_sound_system", 1],
+            [" ", "suona suono su scheda SD %n", "A_sound_play_sd", ""],
+            [" ", "registra suono %n", "A_sound_record", ""],
+            [" ", "riproduci suono %n", "A_sound_replay", ""],
+            [" ", "inizializza isometria %n %n %n", "Q_set_odometer", 90, 0, 0],
+            [" ", "LED sensori prossimità %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
+            [" ", "LED sensori terreno %n %n", "V_leds_prox_v", 32, 32],
+            [" ", "LED bottoni %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
+            [" ", "LED bottoni %n %n", "V_leds_temperature", 32, 8],
+            [" ", "LED microfono %n", "V_leds_sound", 32],
+            [" ", "LED RC %n", "V_leds_rc", 16],
+            [" ", "LED RC %n", "emit", 1],
+            ["r", "ricezione", "receive"],
+            ["R", "ricezione", "temperature"],
+            ["r", "misura motori %m.leftright", "motor", "gauche"],
+            /*["r", "moteur %m.leftright vitesse", "motor_speed", "gauche" ],
+            ["r", "moteur %m.leftright target", "motor_target", "gauche" ],*/
+            ["r", "inclinazione %m.tilts", "tilt", "devant-derrière"],
+            ["r", "sensore prossimità %n", "proximity", 2],
+            ["r", "sensore prossimità %m.proxsensors", "proximity2", "devant extrême gauche"],
+            ["r", "sensore terreno %n", "ground", 0],
+            ["r", "distanza %m.sensors", "distance", "devant"],
+            ["r", "angolo %m.angles", "angle", "devant"],
+            ["r", "sensori di prossimità", "prox_horizontal"],
+            ["r", "sensori di prossimità", "prox_ground_delta"],
+            ["r", "livello sonoro", "mic_intensity"],
+            ["r", "colore LED %m.singlelight", "leds", "dessus"],
+            ["r", "isometria %m.odo", "odo", "direction"],
+            ["b", "rumore captato", "sound_detected"],
+            ["b", "urto %n", "bump"],
+            ["b", "oggetto rilevato %m.sensors", "touching", "devant"],
+            ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "devant"]
         ]
     };
 
@@ -1734,6 +1784,19 @@
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direction", "x", "y"],
             tilts: ["devant-derrière", "dessus-dessous", "gauche-droite à plat"]
+
+        },
+        it: {
+            leftrightall: ["sinistro", "destro", "tutti"],
+            leftright: ["sinistro", "destro"],
+            sensors: ["davanti", "dietro", "terreno"],
+            proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore destro", "posteriore sinistro"],
+            singlelight: ["superiore", "inferiore a sinistra", "inferiore a destra"],
+            light: ["tutti", "superiori", "inferiori", "inferiori a sinistra", "inferiori a destra"],
+            angles: ["davanti", "dietro", "terreno"],
+            sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
+            odo: ["direzione", "x", "y"],
+            tilts: ["frontale-posteriore", "superiore-inferiore", "sinistro-destro"]
 
         }
 
