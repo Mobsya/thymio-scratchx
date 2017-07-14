@@ -1,27 +1,26 @@
 /**
-* Thymio exension for ScratchX
-* v 1.1 for internal use
-* Created by Elisa Bernardoni on May 26, 2017
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU Lesser General Public License as published
-* by the Free Software Foundation, version 3 of the License.
-*	
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU Lesser General Public License for more details.
-*	
-* You should have received a copy of the GNU Lesser General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.	
-*/
-
+ * Thymio exension for ScratchX
+ * v 1.1 for internal use
+ * Created by Elisa Bernardoni on July 13, 2017
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation, version 3 of the License.
+ *	
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *	
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.	
+ */
 (function(ext) {
 
     var ASEBAHTTPURL = 'http://localhost:3000/';
     var VMAX = 500;
     var VMIN = -500;
-    var DEBUG = true;
+    var DEBUG = false;
     var LMAX = 32;
     var LMIN = 0;
 
@@ -34,7 +33,6 @@
 
 
     connect();
-
 
     /**
      * Cleanup function when the extension is unloaded
@@ -61,10 +59,6 @@
         if (DEBUG) {
             console.log("resetAll");
         }
-        //TODO dial
-        //TODO Leds
-        //TODO motors
-        //leds ?
 
         var args = Array();
         sendAction('Q_reset', args, function() {
@@ -87,7 +81,7 @@
      */
     ext._getStatus = function() {
         if (connected == 0) return {
-            status: 1,
+            status: 0,
             msg: 'Thymio disconnected'
         };
         if (connected == 1) return {
@@ -108,7 +102,7 @@
 
     function connect() {
 
-        connected = 1;
+
         if (source) {
             source.close();
             source = null;
@@ -128,7 +122,6 @@
 
             if (eventData[0] == "R_state_update") {
                 cachedValues = eventData;
-                //	console.log("cached "+cachedValues);
                 connected = 2;
             } else {
                 if (DEBUG) {
@@ -149,6 +142,7 @@
         source.addEventListener('error', function(e) {
 
             disconnect('Event stream closed');
+            connected = 0;
             connect();
 
         });
@@ -168,9 +162,6 @@
         }
         connected = 0;
     }
-
-
-
 
     /**
      * The robot moves forward.  If the distance is negative, the robot moves back.
@@ -1097,8 +1088,8 @@
 
         sendAction('V_leds_rc', args);
     };
-    
-    
+
+
     /**
      * Lights the ground sensor LEDs
      * @param {fl} number -  front left value (0 to 32)
@@ -1110,21 +1101,21 @@
      * @param {br} number -  front left value (0 to 32)
      * @param {bl} number -  front left value (0 to 32)
      */
-    ext.V_leds_prox_h = function(fl, flm,flc,frc,frm,fr,br,bl) {
+    ext.V_leds_prox_h = function(fl, flm, flc, frc, frm, fr, br, bl) {
         if (DEBUG) {
-            console.log("called V_leds_prox_h " + fl+" "+flm+" "+flc+" "+frc+" "+frm+" "+fr+" "+br+" "+bl);
+            console.log("called V_leds_prox_h " + fl + " " + flm + " " + flc + " " + frc + " " + frm + " " + fr + " " + br + " " + bl);
         }
 
         var args = Array();
         args.push(parseInt(clamp(fl, LMIN, LMAX)));
         args.push(parseInt(clamp(flm, LMIN, LMAX)));
-		args.push(parseInt(clamp(flc, LMIN, LMAX)));
-		args.push(parseInt(clamp(frc, LMIN, LMAX)));
-		args.push(parseInt(clamp(frm, LMIN, LMAX)));
-		args.push(parseInt(clamp(fr, LMIN, LMAX)));
-		args.push(parseInt(clamp(br, LMIN, LMAX)));
-		args.push(parseInt(clamp(bl, LMIN, LMAX)));
-		
+        args.push(parseInt(clamp(flc, LMIN, LMAX)));
+        args.push(parseInt(clamp(frc, LMIN, LMAX)));
+        args.push(parseInt(clamp(frm, LMIN, LMAX)));
+        args.push(parseInt(clamp(fr, LMIN, LMAX)));
+        args.push(parseInt(clamp(br, LMIN, LMAX)));
+        args.push(parseInt(clamp(bl, LMIN, LMAX)));
+
         sendAction('V_leds_prox_h', args);
     };
 
@@ -1345,6 +1336,38 @@
             return parseInt(cachedValues[12] / 28);
         }
     };
+
+
+    ext.button = function(menu) {
+        if (DEBUG) {
+            console.log("button " + menu);
+        }
+        var num = parseInt(cachedValues[2]);
+
+        if (menu == menus[lang]['buttons'][0]) {
+            var center = parseInt((num >> 3) & 1);
+            if (center == 1) return true;
+            else return false;
+        } else if (menu == menus[lang]['buttons'][1]) {
+            var forward = parseInt((num >> 2) & 1);
+            if (forward == 1) return true;
+            else return false;
+        } else if (menu == menus[lang]['buttons'][2]) {
+            var backward = parseInt((num >> 4) & 1);
+            if (backward == 1) return true;
+            else return false;
+        } else if (menu == menus[lang]['buttons'][3]) {
+            var left = parseInt((num >> 1) & 1);
+            if (left == 1) return true;
+            else return false;
+        } else if (menu == menus[lang]['buttons'][4]) {
+            var right = parseInt((num) & 1);
+            if (right == 1) return true;
+            else return false;
+        }
+        return false;
+    };
+
 
     /**
      * Returns the value of the microphone intensity
@@ -1571,7 +1594,7 @@
         if (sensor == menus[lang]['sensors'][0]) { //front
 
             for (i = 0; i < 5; i++) {
-                if (parseInt(cachedValues[17 + i])) return true;
+                if (parseInt(cachedValues[17 + i]) > threshold) return true;
             }
             return false;
         } else if (sensor == menus[lang]['sensors'][1]) { //back
@@ -1613,8 +1636,8 @@
             ["w", "move %n in %n s", "scratch_move_with_time", 50, 1],
             ["w", "circle radius %n angle %n", "scratch_arc", 150, 45],
             ["w", "turn %n", "scratch_turn", 45],
-            ["w", "turn %n with speed %n", "scratch_turn_with_speed", 90,50],
-            ["w", "turn %n in %n s", "scratch_turn_with_time", 90,1],
+            ["w", "turn %n with speed %n", "scratch_turn_with_speed", 90, 50],
+            ["w", "turn %n in %n s", "scratch_turn_with_time", 90, 1],
             [" ", "motor %m.leftrightall %n", "scratch_motor", "left", 50],
             [" ", "stop motors", "scratch_stop"],
             [" ", "leds next dial %m.leftright", "scratch_next_dial", "left"],
@@ -1654,8 +1677,9 @@
             ["r", "odometer %m.odo", "odo", "direction"],
             ["b", "sound detected", "sound_detected"],
             ["b", "tap %n", "bump"],
-            ["b", "object detected %m.sensors", "touching", "left"],
-            ["b", "object detected %m.sensors %n", "touching_threshold", "left"]
+            ["b", "object detected %m.sensors", "touching", "front"],
+            ["b", "object detected %m.sensors %n", "touching_threshold", "front"],
+            ["h", "button %m.buttons", "button", "center"]
         ],
         fr: [
             ["w", "avancer %n", "scratch_move", 50],
@@ -1663,8 +1687,8 @@
             ["w", "avancer %n en %n s", "scratch_move_with_time", 50, 1],
             ["w", "cercle rayon %n angle %n", "scratch_arc", 150, 45],
             ["w", "tourner %n", "scratch_turn", 45],
-            ["w", "tourner %n avec vitesse %n", "scratch_turn_with_speed", 90,50],
-            ["w", "tourner %n en %n s", "scratch_turn_with_time", 90,1],
+            ["w", "tourner %n avec vitesse %n", "scratch_turn_with_speed", 90, 50],
+            ["w", "tourner %n en %n s", "scratch_turn_with_time", 90, 1],
             [" ", "moteur %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "stop moteurs", "scratch_stop"],
             [" ", "leds RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
@@ -1679,7 +1703,7 @@
             [" ", "enregistrer son %n", "A_sound_record", ""],
             [" ", "rejouer son %n", "A_sound_replay", ""],
             [" ", "odomètre %n %n %n", "Q_set_odometer", 90, 0, 0],
-            [" ", "leds capteurs horizontal %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
+            [" ", "leds capteurs horiz. %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
             [" ", "leds capteurs dessous %n %n", "V_leds_prox_v", 32, 32],
             [" ", "leds boutons %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
             [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8],
@@ -1705,21 +1729,22 @@
             ["b", "bruit", "sound_detected"],
             ["b", "choc %n", "bump"],
             ["b", "objet détecté %m.sensors", "touching", "devant"],
-            ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"]
+            ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"],
+            ["h", "button %m.buttons", "button", "central"]
         ],
         it: [
             ["w", "avanza di %n", "scratch_move", 50],
             ["w", "avanza di %n con velocità %n", "scratch_move_with_speed", 50, 50],
             ["w", "avanza di %n in %n s", "scratch_move_with_time", 50, 1],
-            ["w", "disegna un cerchio di raggio %n per %n gradi", "scratch_arc", 150, 45],
+            ["w", "fai un cerchio di raggio %n per %n gradi", "scratch_arc", 150, 45],
             ["w", "ruota di %n gradi", "scratch_turn", 45],
-            ["w", "ruota di %n gradi con velocità %n", "scratch_turn_with_speed", 90,50],
-            ["w", "ruota di %n gradi in %n s", "scratch_turn_with_time", 90,1],
+            ["w", "ruota di %n gradi con velocità %n", "scratch_turn_with_speed", 90, 50],
+            ["w", "ruota di %n gradi in %n s", "scratch_turn_with_time", 90, 1],
             [" ", "motori %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "ferma motori", "scratch_stop"],
             [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
-            [" ", "accendi LED quadrante %m.leftright", "scratch_next_dial", "sinistro"],
-            [" ", "accendi LED quadrante %n %n %n %n %n %n %n %n", "V_leds_circle", 0, 8, 16, 32, 0, 8, 16, 32],
+            [" ", "on LED quadrante %m.leftright", "scratch_next_dial", "sinistro"],
+            [" ", "on LED quadrante %n %n %n %n %n %n %n %n", "V_leds_circle", 0, 8, 16, 32, 0, 8, 16, 32],
             [" ", "spegni LED", "scratch_clear_leds"],
             [" ", "colora LED %n %m.light", "scratch_set_leds", 0, "tutti"],
             [" ", "cambia colore LED %n %m.light", "scratch_change_leds", 0, "all"],
@@ -1729,7 +1754,7 @@
             [" ", "registra suono %n", "A_sound_record", ""],
             [" ", "riproduci suono %n", "A_sound_replay", ""],
             [" ", "inizializza isometria %n %n %n", "Q_set_odometer", 90, 0, 0],
-            [" ", "LED sensori prossimità %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
+            [" ", "LED sensori prox. %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
             [" ", "LED sensori terreno %n %n", "V_leds_prox_v", 32, 32],
             [" ", "LED bottoni %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
             [" ", "LED bottoni %n %n", "V_leds_temperature", 32, 8],
@@ -1742,20 +1767,21 @@
             /*["r", "moteur %m.leftright vitesse", "motor_speed", "gauche" ],
             ["r", "moteur %m.leftright target", "motor_target", "gauche" ],*/
             ["r", "inclinazione %m.tilts", "tilt", "davanti-dietro"],
-            ["r", "sensore prossimità %n", "proximity", 2],
-            ["r", "sensore prossimità %m.proxsensors", "proximity2", "tutto a sinistra"],
+            ["r", "sensore prox. %n", "proximity", 2],
+            ["r", "sensore prox. %m.proxsensors", "proximity2", "tutto a sinistra"],
             ["r", "sensore terreno %n", "ground", 0],
             ["r", "distanza %m.sensors", "distance", "davanti"],
             ["r", "angolo %m.angles", "angle", "davanti"],
-            ["r", "sensori di prossimità", "prox_horizontal"],
-            ["r", "sensori di prossimità", "prox_ground_delta"],
+            ["r", "sensori di prox.", "prox_horizontal"],
+            ["r", "sensori di prox.", "prox_ground_delta"],
             ["r", "livello sonoro", "mic_intensity"],
             ["r", "colore LED %m.singlelight", "leds", "sopra"],
             ["r", "isometria %m.odo", "odo", "direzione"],
             ["b", "rumore captato", "sound_detected"],
             ["b", "urto %n", "bump"],
             ["b", "oggetto rilevato %m.sensors", "touching", "davanti"],
-            ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "davanti"]
+            ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "davanti"],
+            ["h", "bottone %m.buttons", "button", "centrale"]
         ]
     };
 
@@ -1764,39 +1790,42 @@
             leftrightall: ["left", "right", "all"],
             leftright: ["left", "right"],
             sensors: ["front", "back", "ground"],
-            proxsensors: ["front far left", "front left", "front center", "front right", "front far right", "back right", "back left"],
+            proxsensors: ["front far left", "front left", "front center", "front right", "front far right", "back left", "back right"],
             singlelight: ["top", "bottom-left", "bottom-right"],
             light: ["all", "top", "bottom", "bottom-left", "bottom-right"],
             angles: ["front", "back", "ground"],
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direction", "x", "y"],
-            tilts: ["front-back", "top-bottom", "left-right"]
+            tilts: ["front-back", "top-bottom", "left-right"],
+            buttons: ["center", "front", "back", "left", "right"]
 
         },
         fr: {
             leftrightall: ["gauche", "droite", "tous"],
             leftright: ["gauche", "droite"],
             sensors: ["devant", "derrière", "dessous"],
-            proxsensors: ["devant extrême gauche", "devant gauche", "devant centre", "devant droite", "devant extrême droite", "derrière droite", "derrière gauche"],
+            proxsensors: ["devant extrême gauche", "devant gauche", "devant centre", "devant droite", "devant extrême droite", "derrière gauche", "derrière droite"],
             singlelight: ["dessus", "dessous gauche", "dessous droite"],
             light: ["tout", "dessus", "dessous", "dessous gauche", "dessous droite"],
             angles: ["devant", "derrière", "dessous"],
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direction", "x", "y"],
-            tilts: ["devant-derrière", "dessus-dessous", "gauche-droite à plat"]
+            tilts: ["devant-derrière", "dessus-dessous", "gauche-droite à plat"],
+            buttons: ["central", "devant", "derrière", "gauche", "droite"]
 
         },
         it: {
             leftrightall: ["sinistro", "destro", "tutti"],
             leftright: ["sinistro", "destro"],
             sensors: ["davanti", "dietro", "terreno"],
-            proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore destro", "posteriore sinistro"],
+            proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore sinistro", "posteriore destro"],
             singlelight: ["sopra", "sotto a sinistra", "sotto a destra"],
             light: ["tutti", "superiori", "inferiori", "inferiori a sinistra", "inferiori a destra"],
             angles: ["davanti", "dietro", "terreno"],
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direzione", "x", "y"],
-            tilts: ["davanti-dietro", "sopra-sotto", "sinistro-destro"]
+            tilts: ["davanti-dietro", "sopra-sotto", "sinistro-destro"],
+            buttons: ["centrale", "davanti", "dietro", "sinistra", "destra"]
 
         }
 
@@ -1805,7 +1834,7 @@
     var descriptor = {
         blocks: blocks[lang],
         menus: menus[lang]
-           
+
     };
 
     // Register the extension
@@ -1942,6 +1971,5 @@
         console.log(rgb);
         return rgb;
     }
-
 
 })({});
