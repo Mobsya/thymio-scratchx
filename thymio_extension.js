@@ -1730,7 +1730,7 @@
             ["b", "choc %n", "bump"],
             ["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"],
-            ["h", "button %m.buttons", "button", "central"]
+            ["h", "bouton %m.buttons", "button", "central"]
         ],
         it: [
             ["w", "avanza di %n", "scratch_move", 50],
