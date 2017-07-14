@@ -1,0 +1,91 @@
+	avancer (50):: motion
+
+	avancer (10) avec vitesse (50) :: motion
+
+	avancer (50) en (1)s :: motion
+
+	cercle (150)(45):: motion
+
+	tourner (45):: motion
+
+	tourner (90) en (1)s ::motion
+
+	moteurs [gauche v] ::motion
+
+	stop moteurs ::motion
+
+	leds rvb [toutes v](0)(0)(32) ::motion
+
+	leds cadran suivante [gauche v] ::motion
+
+	leds cadran toutes (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+	eteindre leds ::motion
+
+	leds fixer couleur (0) pour [tout v] ::motion
+
+	leds changer couleur (0) pour [tout v] ::motion
+
+	enregistrer son () ::motion
+
+	rejouer son () ::motion
+
+	odomètre (90)(0)(0) ::motion
+
+	leds capteurs horiz (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+	leds capteurs dessous (32)(32) ::motion
+
+	leds boutons (16)(32)(16)(32) ::motion
+
+	leds temperature (32)(8)::motion
+
+	leds microphone (32)::motion
+
+	leds rc(16)::motion
+
+	emission(1)::motion
+
+	(reception::motion)
+
+	(température::motion)
+
+	(mesure moteurs [gauche v] ::motion)
+
+	(inclinaison [avant-arrière v]::motion)
+
+	(capteurs horizontaux (0)::motion)
+
+	(capteurs horizontaux [extrème gauche v]::motion)
+
+	(capteurs dessous (0)::motion)
+
+	(distance [devant v]::motion)
+
+	(angle [devant v]::motion)
+
+	(capteur horizontaux::motion)
+
+	(capteur dessous::motion)
+
+	(niveau sonore::motion)
+
+	(leds couleurs [dessus v]::motion)
+
+	(mesure odomètre [direction v]::motion)
+
+	<bruit::motion>
+
+	<choc::motion>
+
+	jouer son SD ()::motion
+
+	<objet détecté [devant v]::motion>
+
+	<objet détecté [devant v] (10) ::motion>
+	
+	jouer son système [1 v]::motion
+
+	jouer note (440) durant (1)s::motion
+
+	tourner (10) avec vitesse (50) :: motion

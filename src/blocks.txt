@@ -1,0 +1,97 @@
+move (50):: motion
+
+move (10) with speed (50) :: motion
+
+move (50) in (1) s:: motion
+
+circle radius(150) angle (45):: motion
+
+turn (45):: motion
+
+turn (90) in (1)s ::motion
+
+motors [left v] ::motion
+
+stop motors ::motion
+
+leds rgb [all v](0)(0)(32) ::motion
+
+leds dial next [left v] ::motion
+
+leds dial all (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+leds clear ::motion
+
+leds set color (0) on [all v] ::motion
+
+leds change color (0) on [all v] ::motion
+
+record sound () ::motion
+
+replay sound () ::motion
+
+set odometer (90)(0)(0) ::motion
+
+leds sensors h (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+leds sensors v (32)(32) ::motion
+
+leds buttons (16)(32)(16)(32) ::motion
+
+leds temperature (32)(8)::motion
+
+leds sound (32)::motion
+
+lesd rc(16)::motion
+
+emit(1)::motion
+
+(receive::motion)
+
+(temperature::motion)
+
+(measure motors [left v] ::motion)
+
+(tilt on[front-back v]::motion)
+
+(proximity sensor (0)::motion)
+
+(proximity sensor [far left v]::motion)
+
+(ground sensor (0)::motion)
+
+(distance [front v]::motion)
+
+(angle [front v]::motion)
+
+(proximity sensor::motion)
+
+(ground sensor::motion)
+
+(sound level::motion)
+
+(leds colors [top v]::motion)
+
+(odometer [direction v]::motion)
+
+<sound detected::motion>
+
+<tap::motion>
+
+play sound SD ()::motion
+
+<object detected [front v]::motion>
+
+<object detected [front v] (10) ::motion>
+
+play system sound [1 v]::motion
+
+play note(440) during (1)s::motion
+
+turn (10) with speed (50) ::motion
+
+
+
+
+
+

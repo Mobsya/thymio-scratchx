@@ -1,0 +1,91 @@
+avanza di (50):: motion
+
+avanza di  (10) con velocità (50) :: motion
+
+avanza di (50) per (1) secondi :: motion
+
+disegna un cerchio di raggio (150) per (45):: motion
+
+ruota di (45) gradi:: motion
+
+ruota di (90) gradi per (1)secondi ::motion
+
+motori [sinistra v] ::motion
+
+ferma motori ::motion
+
+tutti i LED RVB (0)(0)(32) ::motion
+
+accendi LED quadrante verso [sinistra v] ::motion
+
+accendi LED quadrante (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+spegni LED ::motion
+
+colora LED (0) [sopra e sotto v] ::motion
+
+cambia colore LED (0) [sopra e sotto v] ::motion
+
+registra suono () ::motion
+
+riproduci suono () ::motion
+
+inizalizza isometria (90)(0)(0) ::motion
+
+LED sensori prossimità (0)(8)(16)(32)(0)(8)(16)(32) ::motion
+
+LED sensori terreno (32)(32) ::motion
+
+LED bottoni (16)(32)(16)(32) ::motion
+
+LED temperatura (32)(8)::motion
+
+LED microfono (32)::motion
+
+LED RC(16)::motion
+
+emetti(1)::motion
+
+(ricezione::motion)
+
+(temperatura::motion)
+
+(misura motori [sinitra v] ::motion)
+
+(inclinazione [Becchggio v]::motion)
+
+(sensore orizzontale (0)::motion)
+
+(sensore orizzontale [tutto a sinistra v]::motion)
+
+(sensore terreno (0)::motion)
+
+(distanza [davantit v]::motion)
+
+(angolo [davanti v]::motion)
+
+(sensori di prossimità::motion)
+
+(sensori del terreno::motion)
+
+(livello sonore::motion)
+
+(colora LED [sopra v]::motion)
+
+(odometro [direzione v]::motion)
+
+<rumore captato::motion>
+
+<urto::motion>
+
+suona suono su scheda SD ()::motion
+
+<oggetto rilevato [difronte v]::motion>
+
+<oggetto rilevato [difronte v] (10) ::motion>
+
+suona suono Thymio [1 v]::motion
+
+suona nota (440) per (1)s::motion
+
+ruota di (10) gradi con velocità (50) :: motion
