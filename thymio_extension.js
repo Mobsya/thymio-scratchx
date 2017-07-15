@@ -1,7 +1,7 @@
 /**
 * Thymio exension for ScratchX
 * v 1.1 for internal use
-* Created by Elisa Bernardoni on May 26, 2017
+* Created by Elisa Bernardoni on July 14, 2017
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU Lesser General Public License as published
@@ -381,9 +381,9 @@ R_state = [	((((acc[0]/2)+16)%32)&lt;&lt;10) + ((((acc[1]/2)+16)%32)&lt;&lt;5) +
 		  ]\
 \
 # broadcast state at 10 Hz\
-onevent prox\
-if R_state.do==1 then\
-	emit R_state_update(R_state)\
+onevent prox \
+if R_state.do==1 then \
+	emit R_state_update(R_state) \
 end\
 \
 ##! @defgroup Native\
@@ -2357,4 +2357,6 @@ motor.right.target = event.args[0]\
 
 
 })({});
+
+
 
