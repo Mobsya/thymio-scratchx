@@ -1,20 +1,21 @@
 /**
- * Thymio exension for ScratchX
- * v 1.1 for internal use
- * Created by Elisa Bernardoni on May 26, 2017
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation, version 3 of the License.
- *	
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *	
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.	
- */
+* Thymio exension for ScratchX
+* v 1.1 for internal use
+* Created by Elisa Bernardoni on May 26, 2017
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Lesser General Public License as published
+* by the Free Software Foundation, version 3 of the License.
+*	
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Lesser General Public License for more details.
+*	
+* You should have received a copy of the GNU Lesser General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.	
+*/
+
 (function(ext) {
 
     var ASEBAHTTPURL = 'http://localhost:3000/';
@@ -31,9 +32,9 @@
     var leds = [0, 0, 0];
     var dial = -1;
 
-    connect();
-    loadAesl();
-
+	connect();
+	loadAesl();
+	
 
     /**
      * Cleanup function when the extension is unloaded
@@ -107,7 +108,7 @@
 
     function connect() {
 
-
+       
         if (source) {
             source.close();
             source = null;
@@ -127,7 +128,7 @@
 
             if (eventData[0] == "R_state_update") {
                 cachedValues = eventData;
-                console.log("cached " + cachedValues);
+                	console.log("cached "+cachedValues);
                 connected = 2;
             } else {
                 if (DEBUG) {
@@ -169,16 +170,16 @@
         connected = 0;
     }
 
-    /**
+	/**
      * TEST - The function sends Aesl for Thtmio to asebahttp bridge
      */
 
     function loadAesl() {
-        if (DEBUG) {
-            console.log("Send Aesl for Thymio");
-        }
-
-        var xmlstring = '<!DOCTYPE aesl-source>\
+		if(DEBUG){
+			console.log("Send Aesl for Thymio");
+		}
+		
+		var xmlstring='<!DOCTYPE aesl-source>\
 <network>\
 <!--list of global events-->\
 <event size="4" name="Q_add_motion"/>\
@@ -526,18 +527,19 @@ motor.right.target = event.args[0]\
 </node>\
 </network>';
 
-        $.ajax({
-            url: 'http://localhost:3000/nodes/thymio-II',
-            type: 'PUT',
-            data: xmlstring,
-            success: function(data) {
-                connect();
+		$.ajax({
+  			url: 'http://localhost:3000/nodes/thymio-II',
+  			type: 'PUT',
+  			data: xmlstring,
+  		success: function(data) {
+  			connect();
+    	 
+  		}
+});
 
-            }
-        });
 
-
-
+      	
+    	
 
     }
 
@@ -1468,8 +1470,8 @@ motor.right.target = event.args[0]\
 
         sendAction('V_leds_rc', args);
     };
-
-
+    
+    
     /**
      * Lights the ground sensor LEDs
      * @param {fl} number -  front left value (0 to 32)
@@ -1481,21 +1483,21 @@ motor.right.target = event.args[0]\
      * @param {br} number -  front left value (0 to 32)
      * @param {bl} number -  front left value (0 to 32)
      */
-    ext.V_leds_prox_h = function(fl, flm, flc, frc, frm, fr, br, bl) {
+    ext.V_leds_prox_h = function(fl, flm,flc,frc,frm,fr,br,bl) {
         if (DEBUG) {
-            console.log("called V_leds_prox_h " + fl + " " + flm + " " + flc + " " + frc + " " + frm + " " + fr + " " + br + " " + bl);
+            console.log("called V_leds_prox_h " + fl+" "+flm+" "+flc+" "+frc+" "+frm+" "+fr+" "+br+" "+bl);
         }
 
         var args = Array();
         args.push(parseInt(clamp(fl, LMIN, LMAX)));
         args.push(parseInt(clamp(flm, LMIN, LMAX)));
-        args.push(parseInt(clamp(flc, LMIN, LMAX)));
-        args.push(parseInt(clamp(frc, LMIN, LMAX)));
-        args.push(parseInt(clamp(frm, LMIN, LMAX)));
-        args.push(parseInt(clamp(fr, LMIN, LMAX)));
-        args.push(parseInt(clamp(br, LMIN, LMAX)));
-        args.push(parseInt(clamp(bl, LMIN, LMAX)));
-
+		args.push(parseInt(clamp(flc, LMIN, LMAX)));
+		args.push(parseInt(clamp(frc, LMIN, LMAX)));
+		args.push(parseInt(clamp(frm, LMIN, LMAX)));
+		args.push(parseInt(clamp(fr, LMIN, LMAX)));
+		args.push(parseInt(clamp(br, LMIN, LMAX)));
+		args.push(parseInt(clamp(bl, LMIN, LMAX)));
+		
         sendAction('V_leds_prox_h', args);
     };
 
@@ -1718,34 +1720,34 @@ motor.right.target = event.args[0]\
     };
 
 
-    ext.button = function(menu) {
+ 	ext.button = function(menu) {
         if (DEBUG) {
-            console.log("button " + menu);
+            console.log("button "+menu);
         }
         var num = parseInt(cachedValues[2]);
-
-        if (menu == menus[lang]['buttons'][0]) {
-            var center = parseInt((num >> 3) & 1);
-            if (center == 1) return true;
-            else return false;
+		
+		if (menu == menus[lang]['buttons'][0]) {
+			var center = parseInt((num >> 3) & 1);
+			if(center==1) return true;
+			else return false;
         } else if (menu == menus[lang]['buttons'][1]) {
-            var forward = parseInt((num >> 2) & 1);
-            if (forward == 1) return true;
-            else return false;
+			var forward = parseInt((num >> 2) & 1);
+			if(forward==1) return true;
+			else return false;
         } else if (menu == menus[lang]['buttons'][2]) {
-            var backward = parseInt((num >> 4) & 1);
-            if (backward == 1) return true;
-            else return false;
+			var backward = parseInt((num >> 4) & 1);
+			if(backward==1) return true;
+			else return false;
         } else if (menu == menus[lang]['buttons'][3]) {
-            var left = parseInt((num >> 1) & 1);
-            if (left == 1) return true;
-            else return false;
+			var left = parseInt((num >> 1) & 1);
+			if(left==1) return true;
+			else return false;
         } else if (menu == menus[lang]['buttons'][4]) {
-            var right = parseInt((num) & 1);
-            if (right == 1) return true;
-            else return false;
-        }
-        return false;
+			var right = parseInt((num ) & 1);
+			if(right==1) return true;
+			else return false;
+        } 
+       return false;
     };
 
 
@@ -1974,7 +1976,7 @@ motor.right.target = event.args[0]\
         if (sensor == menus[lang]['sensors'][0]) { //front
 
             for (i = 0; i < 5; i++) {
-                if (parseInt(cachedValues[17 + i]) > threshold) return true;
+                if (parseInt(cachedValues[17 + i])>threshold) return true;
             }
             return false;
         } else if (sensor == menus[lang]['sensors'][1]) { //back
@@ -2016,8 +2018,8 @@ motor.right.target = event.args[0]\
             ["w", "move %n in %n s", "scratch_move_with_time", 50, 1],
             ["w", "circle radius %n angle %n", "scratch_arc", 150, 45],
             ["w", "turn %n", "scratch_turn", 45],
-            ["w", "turn %n with speed %n", "scratch_turn_with_speed", 90, 50],
-            ["w", "turn %n in %n s", "scratch_turn_with_time", 90, 1],
+            ["w", "turn %n with speed %n", "scratch_turn_with_speed", 90,50],
+            ["w", "turn %n in %n s", "scratch_turn_with_time", 90,1],
             [" ", "motor %m.leftrightall %n", "scratch_motor", "left", 50],
             [" ", "stop motors", "scratch_stop"],
             [" ", "leds next dial %m.leftright", "scratch_next_dial", "left"],
@@ -2059,7 +2061,7 @@ motor.right.target = event.args[0]\
             ["b", "tap %n", "bump"],
             ["b", "object detected %m.sensors", "touching", "front"],
             ["b", "object detected %m.sensors %n", "touching_threshold", "front"],
-            ["h", "button %m.buttons", "button", "center"]
+            ["h", "button %m.buttons", "button","center"]
         ],
         fr: [
             ["w", "avancer %n", "scratch_move", 50],
@@ -2067,8 +2069,8 @@ motor.right.target = event.args[0]\
             ["w", "avancer %n en %n s", "scratch_move_with_time", 50, 1],
             ["w", "cercle rayon %n angle %n", "scratch_arc", 150, 45],
             ["w", "tourner %n", "scratch_turn", 45],
-            ["w", "tourner %n avec vitesse %n", "scratch_turn_with_speed", 90, 50],
-            ["w", "tourner %n en %n s", "scratch_turn_with_time", 90, 1],
+            ["w", "tourner %n avec vitesse %n", "scratch_turn_with_speed", 90,50],
+            ["w", "tourner %n en %n s", "scratch_turn_with_time", 90,1],
             [" ", "moteur %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "stop moteurs", "scratch_stop"],
             [" ", "leds RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
@@ -2110,7 +2112,7 @@ motor.right.target = event.args[0]\
             ["b", "choc %n", "bump"],
             ["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"],
-            ["h", "button %m.buttons", "button", "central"]
+            ["h", "button %m.buttons", "button","central"]
         ],
         it: [
             ["w", "avanza di %n", "scratch_move", 50],
@@ -2118,8 +2120,8 @@ motor.right.target = event.args[0]\
             ["w", "avanza di %n in %n s", "scratch_move_with_time", 50, 1],
             ["w", "fai un cerchio di raggio %n per %n gradi", "scratch_arc", 150, 45],
             ["w", "ruota di %n gradi", "scratch_turn", 45],
-            ["w", "ruota di %n gradi con velocità %n", "scratch_turn_with_speed", 90, 50],
-            ["w", "ruota di %n gradi in %n s", "scratch_turn_with_time", 90, 1],
+            ["w", "ruota di %n gradi con velocità %n", "scratch_turn_with_speed", 90,50],
+            ["w", "ruota di %n gradi in %n s", "scratch_turn_with_time", 90,1],
             [" ", "motori %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "ferma motori", "scratch_stop"],
             [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
@@ -2161,7 +2163,7 @@ motor.right.target = event.args[0]\
             ["b", "urto %n", "bump"],
             ["b", "oggetto rilevato %m.sensors", "touching", "davanti"],
             ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "davanti"],
-            ["h", "bottone %m.buttons", "button", "centrale"]
+            ["h", "bottone %m.buttons", "button","centrale"]
         ]
     };
 
@@ -2177,7 +2179,7 @@ motor.right.target = event.args[0]\
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direction", "x", "y"],
             tilts: ["front-back", "top-bottom", "left-right"],
-            buttons: ["center", "front", "back", "left", "right"]
+            buttons: ["center","front","back","left","right"]
 
         },
         fr: {
@@ -2191,21 +2193,21 @@ motor.right.target = event.args[0]\
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direction", "x", "y"],
             tilts: ["devant-derrière", "dessus-dessous", "gauche-droite à plat"],
-            buttons: ["central", "devant", "derrière", "gauche", "droite"]
+            buttons: ["central","devant","derrière", "gauche", "droite"]
 
         },
         it: {
             leftrightall: ["sinistro", "destro", "tutti"],
             leftright: ["sinistro", "destro"],
             sensors: ["davanti", "dietro", "terreno"],
-            proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore sinistro", "posteriore destro"],
+            proxsensors: ["tutto a sinistra", "a sinistra", "centrale", "a destra", "tutto a destra", "posteriore sinistro", "posteriore destro" ],
             singlelight: ["sopra", "sotto a sinistra", "sotto a destra"],
             light: ["tutti", "superiori", "inferiori", "inferiori a sinistra", "inferiori a destra"],
             angles: ["davanti", "dietro", "terreno"],
             sounds: ["0", "1", "2", "3", "4", "5", "6", "7"],
             odo: ["direzione", "x", "y"],
             tilts: ["davanti-dietro", "sopra-sotto", "sinistro-destro"],
-            buttons: ["centrale", "davanti", "dietro", "sinistra", "destra"]
+            buttons: ["centrale","davanti","dietro","sinistra","destra"]
 
         }
 
@@ -2214,7 +2216,7 @@ motor.right.target = event.args[0]\
     var descriptor = {
         blocks: blocks[lang],
         menus: menus[lang]
-
+           
     };
 
     // Register the extension
@@ -2355,3 +2357,4 @@ motor.right.target = event.args[0]\
 
 
 })({});
+
