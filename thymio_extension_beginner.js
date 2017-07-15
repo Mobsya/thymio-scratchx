@@ -2023,7 +2023,7 @@ motor.right.target = event.args[0] \
             ["r", "sensore terreno %n", "ground", 0],
             ["b", "urto %n", "bump"],
             ["r", "inclinazione %m.tilts", "tilt", "davanti-dietro"],
-            ["R", "ricezione", "temperature"],
+            ["R", "temperatura", "temperature"],
             ["b", "rumore captato", "sound_detected"],
             ["r", "livello sonoro", "mic_intensity"],
             ["h", "bottone %m.buttons", "button","centrale"]
