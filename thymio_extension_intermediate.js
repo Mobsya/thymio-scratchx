@@ -1921,12 +1921,13 @@ motor.right.target = event.args[0] \
             [" ", "leds sensors h %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
             [" ", "leds sensors v %n %n", "V_leds_prox_v", 32, 32],
             [" ", "leds buttons %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
-            [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8]
+            [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8],
+	    ["h", "button %m.buttons", "button","center"]
+		
            /* ["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"],
             ["r", "proximity sensor %m.proxsensors", "proximity2", "front far left"],
             ["b", "sound detected", "sound_detected"],
-            ["h", "button %m.buttons", "button","center"]
             [" ", "leds next dial %m.leftright", "scratch_next_dial", "left"],
             [" ", "leds dial all %n %n %n %n %n %n %n %n", "V_leds_circle", 0, 8, 16, 32, 0, 8, 16, 32],
             [" ", "odometer %n %n %n", "Q_set_odometer", 90, 0, 0],
@@ -1976,8 +1977,9 @@ motor.right.target = event.args[0] \
             [" ", "leds capteurs horiz. %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
             [" ", "leds capteurs dessous %n %n", "V_leds_prox_v", 32, 32],
             [" ", "leds boutons %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
-            [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8]
-            
+            [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8],
+            ["h", "bouton %m.buttons", "button","central"]
+		
             /*["b", "objet détecté %m.sensors", "touching", "devant"],
             ["b", "objet détecté %m.sensors %n", "touching_threshold", "devant"],
             ["r", "capteur horizontal %m.proxsensors", "proximity2", "devant extrême gauche"],
@@ -2029,8 +2031,8 @@ motor.right.target = event.args[0] \
             [" ", "LED sensori prox. %n %n %n %n %n %n %n %n", "V_leds_prox_h", 0, 16, 32, 32, 16, 0, 32, 32],
             [" ", "LED sensori terreno %n %n", "V_leds_prox_v", 32, 32],
             [" ", "LED bottoni %n %n %n %n", "V_leds_buttons", 16, 32, 16, 32],
-            [" ", "LED bottoni %n %n", "V_leds_temperature", 32, 8]
-            
+            [" ", "LED bottoni %n %n", "V_leds_temperature", 32, 8],
+            ["h", "bottone %m.buttons", "button","centrale"]
            /* ["b", "oggetto rilevato %m.sensors", "touching", "davanti"],
             ["b", "oggetto rilevato %m.sensors %n", "touching_threshold", "davanti"],
             ["r", "sensore prox. %m.proxsensors", "proximity2", "tutto a sinistra"],
