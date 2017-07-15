@@ -2010,7 +2010,7 @@ motor.right.target = event.args[0] \
             [" ", "ferma motori", "scratch_stop"],
             /*[" ", "colora LED %n %m.light", "scratch_set_leds", 0, "tutti"],
             [" ", "cambia colore LED %n %m.light", "scratch_change_leds", 0, "all"],*/
-            [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tout", 0, 0, 32],
+            [" ", "tutti i LED RVB %m.light %n %n %n", "scratch_leds", "tutti", 0, 0, 32],
             [" ", "spegni LED", "scratch_clear_leds"],
             [" ", "suona suono Thymio %m.sounds", "A_sound_system", 1],
             [" ", "suona nota %n per %n s", "A_sound_freq", 440, 1],
