@@ -1,4 +1,4 @@
-**
+/**
 * Thymio exension for ScratchX
 * v 1.1 for internal use
 * Created by Elisa Bernardoni on July 14, 2017
