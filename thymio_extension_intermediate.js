@@ -2022,7 +2022,7 @@ motor.right.target = event.args[0] \
             ["r", "livello sonoro", "mic_intensity"],
             ["b", "urto %n", "bump"],
             ["r", "inclinazione %m.tilts", "tilt", "davanti-dietro"],
-            ["R", "temperature", "temperature"],
+            ["R", "temperatura", "temperature"],
             ["r", "misura motori %m.leftright", "motor", "sinistro"],
             [" ", "emetti %n", "emit", 1],
             ["r", "ricezione", "receive"],
