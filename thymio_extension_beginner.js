@@ -1972,7 +1972,7 @@ motor.right.target = event.args[0] \
             ["R", "température", "temperature"],
             ["b", "bruit", "sound_detected"],
             ["r", "niveau sonore", "mic_intensity"],
-            ["h", "button %m.buttons", "button","central"]
+            ["h", "bouton %m.buttons", "button","central"]
             /*,
             [" ", "moteur %m.leftrightall %n", "scratch_motor", "gauche", 50],
             [" ", "led cadran suivante %m.leftright", "scratch_next_dial", "gauche"],
