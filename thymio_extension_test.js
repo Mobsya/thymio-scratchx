@@ -32,7 +32,7 @@
     var leds = [0, 0, 0];
     var dial = -1;
 
-	connect();
+
 	loadAesl();
 	
 
