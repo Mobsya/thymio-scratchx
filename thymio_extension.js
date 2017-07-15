@@ -380,8 +380,6 @@ R_state = [	((((acc[0]/2)+16)%32)&lt;&lt;10) + ((((acc[1]/2)+16)%32)&lt;&lt;5) +
 			Qid[0:3]\
 		  ]\
 \
-# broadcast state at 10 Hz\
-\
 onevent prox \
 \
 if R_state.do==1 then \
