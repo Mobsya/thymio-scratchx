@@ -2236,7 +2236,7 @@ motor.right.target = event.args[0] \
                 rgb[2] = 33 - color % 33;
                 break;
         }
-        console.log(rgb);
+        
         return rgb;
     }
 
