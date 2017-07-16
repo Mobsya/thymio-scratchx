@@ -126,16 +126,14 @@
         source.addEventListener('message', function(e) {
 
             eventData = e.data.split(" ");
-
+	    connected = 2;
+		
             if (eventData[0] == "R_state_update") {
                 cachedValues = eventData;
-                	console.log("cached "+cachedValues);
-                connected = 2;
             } else {
                 if (DEBUG) {
                     console.log("emitted " + eventData)
                 }
-                connected = 1;
             }
 
 
@@ -171,8 +169,8 @@
         connected = 0;
     }
 
-	/**
-     * TEST - The function sends Aesl for Thtmio to asebahttp bridge
+    /**
+     *The function sends code of thymio_motion.aesl to asebahttp bridge
      */
 
     function loadAesl() {
@@ -2236,7 +2234,7 @@ motor.right.target = event.args[0] \
                 rgb[2] = 33 - color % 33;
                 break;
         }
-        console.log(rgb);
+      
         return rgb;
     }
 
