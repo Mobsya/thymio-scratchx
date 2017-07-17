@@ -365,6 +365,11 @@ div#activities {
     filter: drop-shadow(0px 8px 4px rgba(0,0,0,0.1));
 }
 
+.blue-cta {
+    color: #0087ff;
+    font-weight: 400;
+    font-family: 'Open Sans';
+}
 
 @media (max-width: 1280px) {
 
