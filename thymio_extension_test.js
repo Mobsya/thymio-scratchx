@@ -409,14 +409,6 @@ motor.right.target = event.args[0] \
 </node> \
 </network>';
 
-
-
-		xmlstring=xmlstring.replace(/&/g, "&amp;")
-  		.replace(/"/g, "&quot;")
-  		.replace(/'/g, "&apos;")
-  		.replace(/</g, "&lt;")
-  		.replace(/>/g, "&gt;");
-  
 		$.ajax({
   			url: 'http://localhost:3000/nodes/thymio-II',
   			type: 'PUT',
