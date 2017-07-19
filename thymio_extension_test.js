@@ -161,8 +161,9 @@
                     console.log("emitted " + eventData)
                 }
               
-              	 if (eventData[0] == "24") {
-              	  setup();
+              	 if (eventData[0] == "24" && connected!=1) {
+              	 	connected==1;
+              	  	setup();
               	 }
             }
 
