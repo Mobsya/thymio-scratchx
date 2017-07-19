@@ -13,7 +13,7 @@
 * GNU Lesser General Public License for more details.
 *	
 * You should have received a copy of the GNU Lesser General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.	
+* along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.	
 */
 
 (function(ext) {
@@ -179,37 +179,41 @@
 			console.log("Send Aesl for Thymio");
 		}
 		
-		var xmlstring='<!DOCTYPE aesl-source> \
-<network> \
-<event size="4" name="Q_add_motion"/> \
-<event size="1" name="Q_cancel_motion"/> \
-<event size="5" name="Q_motion_added"/> \
-<event size="5" name="Q_motion_cancelled"/> \
-<event size="5" name="Q_motion_started"/> \
-<event size="5" name="Q_motion_ended"/> \
-<event size="1" name="Q_motion_noneleft"/> \
-<event size="3" name="Q_set_odometer"/> \
-<event size="8" name="V_leds_prox_h"/> \
-<event size="8" name="V_leds_circle"/> \
-<event size="3" name="V_leds_top"/> \
-<event size="4" name="V_leds_bottom"/> \
-<event size="2" name="V_leds_prox_v"/> \
-<event size="4" name="V_leds_buttons"/> \
-<event size="1" name="V_leds_rc"/> \
-<event size="2" name="V_leds_temperature"/> \
-<event size="1" name="V_leds_sound"/> \
-<event size="2" name="A_sound_freq"/> \
-<event size="1" name="A_sound_play"/> \
-<event size="1" name="A_sound_system"/> \
-<event size="1" name="A_sound_replay"/> \
-<event size="1" name="A_sound_record"/> \
-<event size="1" name="M_motor_left"/> \
-<event size="1" name="M_motor_right"/> \
-<event size="27" name="R_state_update"/> \
-<event size="0" name="Q_reset"/> \
-<constant value="4" name="QUEUE"/> \
-<keywords flag="true"/> \
-<node nodeId="1" name="thymio-II"> \
+		var xmlstring='&lt;!DOCTYPE aesl-source&gt; \
+&lt;network&gt; \
+&lt;!--list of global events--&gt; \
+&lt;event size="4" name="Q_add_motion"/&gt; \
+&lt;event size="1" name="Q_cancel_motion"/&gt; \
+&lt;event size="5" name="Q_motion_added"/&gt; \
+&lt;event size="5" name="Q_motion_cancelled"/&gt; \
+&lt;event size="5" name="Q_motion_started"/&gt; \
+&lt;event size="5" name="Q_motion_ended"/&gt; \
+&lt;event size="1" name="Q_motion_noneleft"/&gt; \
+&lt;event size="3" name="Q_set_odometer"/&gt; \
+&lt;event size="8" name="V_leds_prox_h"/&gt; \
+&lt;event size="8" name="V_leds_circle"/&gt; \
+&lt;event size="3" name="V_leds_top"/&gt; \
+&lt;event size="4" name="V_leds_bottom"/&gt; \
+&lt;event size="2" name="V_leds_prox_v"/&gt; \
+&lt;event size="4" name="V_leds_buttons"/&gt; \
+&lt;event size="1" name="V_leds_rc"/&gt; \
+&lt;event size="2" name="V_leds_temperature"/&gt; \
+&lt;event size="1" name="V_leds_sound"/&gt; \
+&lt;event size="2" name="A_sound_freq"/&gt; \
+&lt;event size="1" name="A_sound_play"/&gt; \
+&lt;event size="1" name="A_sound_system"/&gt; \
+&lt;event size="1" name="A_sound_replay"/&gt; \
+&lt;event size="1" name="A_sound_record"/&gt; \
+&lt;event size="1" name="M_motor_left"/&gt; \
+&lt;event size="1" name="M_motor_right"/&gt; \
+&lt;event size="27" name="R_state_update"/&gt; \
+&lt;event size="0" name="Q_reset"/&gt; \
+&lt;!--list of constants--&gt; \
+&lt;constant value="4" name="QUEUE"/&gt; \
+&lt;!--show keywords state--&gt; \
+&lt;keywords flag="true"/&gt; \
+&lt;!--node thymio-II--&gt; \
+&lt;node nodeId="1" name="thymio-II"&gt; \
 var tmp[9] \
 var Qid[QUEUE]   = [ 0,0,0,0 ] \
 var Qtime[QUEUE] = [ 0,0,0,0 ] \
@@ -239,11 +243,11 @@ call math.muldiv(tmp[0:1], [odo.delta,odo.delta],tmp[0:1], [32767,32767]) \
 odo.x += tmp[0]/45 \
 odo.y += tmp[1]/45 \
 odo.degree = 90 - (odo.theta / 182) \
-if Qtime[Qpc] > 0 then \
+if Qtime[Qpc] &gt; 0 then \
 	emit Q_motion_started([Qid[Qpc], Qtime[Qpc], QspL[Qpc], QspR[Qpc], Qpc]) \
 	Qtime[Qpc] = 0 - Qtime[Qpc] \
 end \
-if Qtime[Qpc] < 0 then \
+if Qtime[Qpc] &lt; 0 then \
 	motor.left.target = QspL[Qpc] \
 	motor.right.target = QspR[Qpc] \
 	Qtime[Qpc] += 1 \
@@ -315,17 +319,17 @@ call math.clamp(distance.back,125-distance.back,0,125) \
 call math.dot(angle.front, prox.horizontal,[4,3,0,-3,-4,0,0],9) \
 call math.dot(angle.back, prox.horizontal,[0,0,0,0,0,-4,4],9) \
 call math.dot(angle.ground, prox.ground.delta,[4,-4],7) \
-R_state = [	((((acc[0]/2)+16)%32)<<10) + ((((acc[1]/2)+16)%32)<<5) + (((acc[2]/2)+16)%32), \
-			(((mic.intensity/mic.threshold)%8)<<8) + \
-				(0<<5) + \
-				(button.backward<<4) + \
-				(button.center<<3) + \
-				(button.forward<<2) + \
-				(button.left<<1) + \
+R_state = [	((((acc[0]/2)+16)%32)&lt;&lt;10) + ((((acc[1]/2)+16)%32)&lt;&lt;5) + (((acc[2]/2)+16)%32), \
+			(((mic.intensity/mic.threshold)%8)&lt;&lt;8) + \
+				(0&lt;&lt;5) + \
+				(button.backward&lt;&lt;4) + \
+				(button.center&lt;&lt;3) + \
+				(button.forward&lt;&lt;2) + \
+				(button.left&lt;&lt;1) + \
 				button.right, \
-			((angle.ground+90) << 8) + (angle.back+90), \
+			((angle.ground+90) &lt;&lt; 8) + (angle.back+90), \
 			angle.front, \
-			(distance.back<<8) + distance.front, \
+			(distance.back&lt;&lt;8) + distance.front, \
 			motor.left.target, \
 			motor.right.target, \
 			motor.left.speed, \
@@ -402,8 +406,8 @@ motor.left.target = event.args[0] \
 onevent M_motor_right \
 motor.right.target = event.args[0] \
  \
-</node> \
-</network>';
+&lt;/node&gt; \
+&lt;/network&gt;';
 
 		$.ajax({
   			url: 'http://localhost:3000/nodes/thymio-II',
@@ -446,10 +450,10 @@ motor.right.target = event.args[0] \
 
         } else {
             var speed;
-            if (Math.abs(mm) < 20) {
+            if (Math.abs(mm) &lt; 20) {
                 speed = 20;
             } else {
-                if (Math.abs(mm) > 150) {
+                if (Math.abs(mm) &gt; 150) {
                     speed = 150;
                 } else {
                     speed = Math.abs(mm);
@@ -461,7 +465,7 @@ motor.right.target = event.args[0] \
 
             args.push("Q_add_motion");
             args.push(time);
-            if (mm > 0) {
+            if (mm &gt; 0) {
                 args.push(speed);
                 args.push(speed);
             } else {
@@ -484,7 +488,7 @@ motor.right.target = event.args[0] \
 
                         if (eventData[0].match(/^Q_motion_noneleft/)) {
                             if (DEBUG) {
-                                console.log(eventData[0] + "=> call callback ");
+                                console.log(eventData[0] + "=&gt; call callback ");
                             }
 
                             callback();
@@ -527,7 +531,7 @@ motor.right.target = event.args[0] \
 
             args.push("Q_add_motion");
             args.push(time);
-            if (mm > 0) {
+            if (mm &gt; 0) {
                 args.push(speed);
                 args.push(speed);
             } else {
@@ -549,7 +553,7 @@ motor.right.target = event.args[0] \
 
                     if (eventData[0].match(/^Q_motion_noneleft/)) {
                         if (DEBUG) {
-                            console.log(eventData[0] + "=> call callback ");
+                            console.log(eventData[0] + "=&gt; call callback ");
                         }
 
                         callback();
@@ -584,7 +588,7 @@ motor.right.target = event.args[0] \
 
         args.push("Q_add_motion");
         args.push(time);
-        if (mm > 0) {
+        if (mm &gt; 0) {
             args.push(speed);
             args.push(speed);
         } else {
@@ -606,7 +610,7 @@ motor.right.target = event.args[0] \
 
                 if (eventData[0].match(/^Q_motion_noneleft/)) {
                     if (DEBUG) {
-                        console.log(eventData[0] + "=> call callback ");
+                        console.log(eventData[0] + "=&gt; call callback ");
                     }
 
                     callback();
@@ -635,7 +639,7 @@ motor.right.target = event.args[0] \
 
     /**
      * The robot moves on an arc of circle of a given radius and of a given angle
-     * If the radius> 0, it goes forward otherwise goes backwards. If angle> 0 begins to the right, if negative, starts to the left.
+     * If the radius&gt; 0, it goes forward otherwise goes backwards. If angle&gt; 0 begins to the right, if negative, starts to the left.
      * @param {radius} number - Radius in mm
      * @param {angle} number - Angle in degrees
      * @param {function} callback - ScratchX callback function
@@ -647,8 +651,8 @@ motor.right.target = event.args[0] \
         angle = parseInt(angle);
         radius = parseInt(radius);
 
-        if (Math.abs(radius) < 100)
-            radius = (radius < 0) ? -100 : 100; // although actually, we should just call scratch_turn
+        if (Math.abs(radius) &lt; 100)
+            radius = (radius &lt; 0) ? -100 : 100; // although actually, we should just call scratch_turn
 
         var ratio = (Math.abs(radius) - 95) * 10000 / Math.abs(radius);
         var time = (angle * (50.36 * radius + 25)) / 3600;
@@ -656,7 +660,7 @@ motor.right.target = event.args[0] \
         var v_out = 400;
         var v_in = v_out * ratio / 10000;
 
-        if (radius < 0) {
+        if (radius &lt; 0) {
 
             v_in = -v_in;
             v_out = -v_out;
@@ -665,8 +669,8 @@ motor.right.target = event.args[0] \
         var args = Array();
         args.push("Q_add_motion");
         args.push(time);
-        args.push((angle > 0) ? v_out : v_in);
-        args.push((angle > 0) ? v_in : v_out);
+        args.push((angle &gt; 0) ? v_out : v_in);
+        args.push((angle &gt; 0) ? v_in : v_out);
 
 
         // Send request
@@ -681,7 +685,7 @@ motor.right.target = event.args[0] \
             eventCompleteCallback = function(eventData) {
                 if (eventData[0].match(/^Q_motion_noneleft/)) {
                     if (DEBUG) {
-                        console.log(eventData[0] + "=> call callback ");
+                        console.log(eventData[0] + "=&gt; call callback ");
                     }
                     callback();
                 };
@@ -693,7 +697,7 @@ motor.right.target = event.args[0] \
     };
 
     /**
-     * The robots turns in place of a given angle (to the left if> 0, to the right if <0) then stops.
+     * The robots turns in place of a given angle (to the left if&gt; 0, to the right if &lt;0) then stops.
      * @param {angle} number - Angle in degrees
      * @param {function} callback - ScratchX callback function
      */
@@ -704,7 +708,7 @@ motor.right.target = event.args[0] \
 
         angle = parseInt(angle);
         var speed, time;
-        if (Math.abs(angle) > 90) {
+        if (Math.abs(angle) &gt; 90) {
             speed = 65 * 32 / 10;
             time = Math.abs(angle) * 1.3;
         } else {
@@ -715,8 +719,8 @@ motor.right.target = event.args[0] \
         var args = Array();
         args.push("Q_add_motion");
         args.push(time);
-        args.push((angle > 0) ? speed : speed * -1);
-        args.push((angle > 0) ? speed * -1 : speed);
+        args.push((angle &gt; 0) ? speed : speed * -1);
+        args.push((angle &gt; 0) ? speed * -1 : speed);
 
 
         // Send request
@@ -730,7 +734,7 @@ motor.right.target = event.args[0] \
             eventCompleteCallback = function(eventData) {
                 if (eventData[0].match(/^Q_motion_noneleft/)) {
                     if (DEBUG) {
-                        console.log(eventData[0] + "=> call callback ");
+                        console.log(eventData[0] + "=&gt; call callback ");
                     }
                     callback();
                 };
@@ -741,7 +745,7 @@ motor.right.target = event.args[0] \
     };
 
     /**
-     * The robots turns in place of a given angle with a given speed (to the left if angle> 0, to the right if angle <0) then stops.
+     * The robots turns in place of a given angle with a given speed (to the left if angle&gt; 0, to the right if angle &lt;0) then stops.
      * If the value of the angle is not specified, the robot does not stop.
      * @param {angle} number - Angle in degrees
      * @param {speed} number - Speed in mm/s
@@ -774,7 +778,7 @@ motor.right.target = event.args[0] \
 
             args.push("Q_add_motion");
             args.push(time);
-            if (angle > 0) {
+            if (angle &gt; 0) {
                 args.push(speed);
                 args.push(speed * -1);
             } else {
@@ -796,7 +800,7 @@ motor.right.target = event.args[0] \
 
                     if (eventData[0].match(/^Q_motion_noneleft/)) {
                         if (DEBUG) {
-                            console.log(eventData[0] + "=> call callback ");
+                            console.log(eventData[0] + "=&gt; call callback ");
                         }
 
                         callback();
@@ -809,7 +813,7 @@ motor.right.target = event.args[0] \
 
 
     /**
-     * The robots turns in place of a given angle in a given time (to the left if angle > 0, to the right if angle <0) then stops.
+     * The robots turns in place of a given angle in a given time (to the left if angle &gt; 0, to the right if angle &lt;0) then stops.
      * @param {angle} number - Angle in degrees
      * @param {time} number - Time in s
      * @param {function} callback - ScratchX callback function
@@ -832,7 +836,7 @@ motor.right.target = event.args[0] \
 
         args.push("Q_add_motion");
         args.push(time * 100);
-        if (angle > 0) {
+        if (angle &gt; 0) {
             args.push(speed);
             args.push(speed * -1);
         } else {
@@ -854,7 +858,7 @@ motor.right.target = event.args[0] \
 
                 if (eventData[0].match(/^Q_motion_noneleft/)) {
                     if (DEBUG) {
-                        console.log(eventData[0] + "=> call callback ");
+                        console.log(eventData[0] + "=&gt; call callback ");
                     }
 
                     callback();
@@ -919,7 +923,7 @@ motor.right.target = event.args[0] \
             console.log("called proximity " + sensor);
         }
         sensor = parseInt(sensor);
-        if (sensor >= 0 && sensor <= 6)
+        if (sensor &gt;= 0 && sensor &lt;= 6)
             return parseInt(cachedValues[17 + sensor]);
         else return 0;
 
@@ -952,7 +956,7 @@ motor.right.target = event.args[0] \
             sensor = 6;
         }
 
-        if (sensor >= 0 && sensor <= 6)
+        if (sensor &gt;= 0 && sensor &lt;= 6)
             return parseInt(cachedValues[17 + sensor]);
         else return 0;
 
@@ -1255,7 +1259,7 @@ motor.right.target = event.args[0] \
 
 
         var args = Array();
-        for (i = 0; i < 8; i++)
+        for (i = 0; i &lt; 8; i++)
             args.push(0);
         args[dial] = 32;
 
@@ -1405,20 +1409,20 @@ motor.right.target = event.args[0] \
         }
 
         var args = Array();
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i &lt; 8; i++) {
             args.push(0);
         }
 
         sendAction('V_leds_circle', args, function() {
 
             var args = Array();
-            for (i = 0; i < 3; i++) {
+            for (i = 0; i &lt; 3; i++) {
                 args.push(0);
             }
             sendAction('V_leds_top', args, function() {
 
                 var args = Array();
-                for (i = 0; i < 4; i++) {
+                for (i = 0; i &lt; 4; i++) {
                     args.push(0);
                 }
 
@@ -1426,7 +1430,7 @@ motor.right.target = event.args[0] \
 
                     var args = Array();
                     args.push(1);
-                    for (i = 0; i < 3; i++) {
+                    for (i = 0; i &lt; 3; i++) {
                         args.push(0);
                     }
                     sendAction('V_leds_bottom', args, function() {
@@ -1458,7 +1462,7 @@ motor.right.target = event.args[0] \
 
         var value = cachedValues[17];
 
-        for (i = 1; i < 7; i++) {
+        for (i = 1; i &lt; 7; i++) {
             value = value + " " + cachedValues[(17 + i)];
         }
 
@@ -1480,11 +1484,11 @@ motor.right.target = event.args[0] \
             var front = num & 0xff;
             return clamp(front, 0, 190);
         } else if (sensor == menus[lang]['sensors'][1]) {
-            var back = ((num >> 8) & 0xff);
+            var back = ((num &gt;&gt; 8) & 0xff);
             return clamp(back, 0, 125);
         } else {
             var ground = parseInt(cachedValues[15]) + parseInt(cachedValues[16]);
-            if (ground > 1000)
+            if (ground &gt; 1000)
                 return 0;
             else return 500;
         }
@@ -1506,7 +1510,7 @@ motor.right.target = event.args[0] \
         } else {
             var num = parseInt(cachedValues[3]);
             var back = (num % 256) - 90;
-            var ground = ((num >> 8) % 256) - 90;
+            var ground = ((num &gt;&gt; 8) % 256) - 90;
 
             if (sensor == menus[lang]['sensors'][1])
                 return back;
@@ -1604,19 +1608,19 @@ motor.right.target = event.args[0] \
         var num = parseInt(cachedValues[2]);
 		
 		if (menu == menus[lang]['buttons'][0]) {
-			var center = parseInt((num >> 3) & 1);
+			var center = parseInt((num &gt;&gt; 3) & 1);
 			if(center==1) return true;
 			else return false;
         } else if (menu == menus[lang]['buttons'][1]) {
-			var forward = parseInt((num >> 2) & 1);
+			var forward = parseInt((num &gt;&gt; 2) & 1);
 			if(forward==1) return true;
 			else return false;
         } else if (menu == menus[lang]['buttons'][2]) {
-			var backward = parseInt((num >> 4) & 1);
+			var backward = parseInt((num &gt;&gt; 4) & 1);
 			if(backward==1) return true;
 			else return false;
         } else if (menu == menus[lang]['buttons'][3]) {
-			var left = parseInt((num >> 1) & 1);
+			var left = parseInt((num &gt;&gt; 1) & 1);
 			if(left==1) return true;
 			else return false;
         } else if (menu == menus[lang]['buttons'][4]) {
@@ -1637,7 +1641,7 @@ motor.right.target = event.args[0] \
         }
         var num = parseInt(cachedValues[2]);
 
-        var intensity = parseInt(((num >> 8) % 8));
+        var intensity = parseInt(((num &gt;&gt; 8) % 8));
         return intensity;
     };
 
@@ -1661,8 +1665,8 @@ motor.right.target = event.args[0] \
         }
         var num = parseInt(cachedValues[2]);
 
-        var intensity = parseInt(((num >> 8) % 8));
-        if (intensity > 2) return true;
+        var intensity = parseInt(((num &gt;&gt; 8) % 8));
+        if (intensity &gt; 2) return true;
         else return false;
     };
 
@@ -1713,9 +1717,9 @@ motor.right.target = event.args[0] \
 
         var num = cachedValues[1];
         if (menu == menus[lang]['tilts'][2]) {
-            return (((num >> 10) % 32) - 16) * 2;
+            return (((num &gt;&gt; 10) % 32) - 16) * 2;
         } else if (menu == menus[lang]['tilts'][0]) {
-            return (((num >> 5) % 32) - 16) * 2;
+            return (((num &gt;&gt; 5) % 32) - 16) * 2;
         } else if (menu == menus[lang]['tilts'][1]) {
             return ((num % 32) - 16) * 2;
         } else {
@@ -1736,11 +1740,11 @@ motor.right.target = event.args[0] \
 
         value = parseInt(value);
         var num = cachedValues[1];
-        var acc0 = (((num >> 10) % 32) - 16) * 2
-        var acc1 = (((num >> 5) % 32) - 16) * 2;
+        var acc0 = (((num &gt;&gt; 10) % 32) - 16) * 2
+        var acc1 = (((num &gt;&gt; 5) % 32) - 16) * 2;
         var acc2 = ((num % 32) - 16) * 2
         var ave = (acc0 + acc1 + acc2) / 3;
-        if (parseInt(ave) > value) {
+        if (parseInt(ave) &gt; value) {
             return true;
         } else {
             return false;
@@ -1808,10 +1812,10 @@ motor.right.target = event.args[0] \
 
         if (sensor == menus[lang]['sensors'][0]) { //front
             var value = 0;
-            for (i = 0; i < 5; i++) {
+            for (i = 0; i &lt; 5; i++) {
                 value = value + parseInt(cachedValues[17 + i]);
             }
-            if (value / 1000 > 0) {
+            if (value / 1000 &gt; 0) {
                 return true;
             } else {
                 return false;
@@ -1819,7 +1823,7 @@ motor.right.target = event.args[0] \
         } else if (sensor == menus[lang]['sensors'][1]) { //back
             var value = parseInt(cachedValues[22]) + parseInt(cachedValues[23]);
 
-            if (value / 1000 > 0) {
+            if (value / 1000 &gt; 0) {
                 return true;
             } else {
                 return false;
@@ -1827,7 +1831,7 @@ motor.right.target = event.args[0] \
         } else { //ground
             var value = parseInt(cachedValues[15]) + parseInt(cachedValues[16]);
 
-            if (value / 500 > 0) {
+            if (value / 500 &gt; 0) {
                 return true;
             } else {
                 return false;
@@ -1848,19 +1852,19 @@ motor.right.target = event.args[0] \
         threshold = parseInt(threshold);
         if (sensor == menus[lang]['sensors'][0]) { //front
 
-            for (i = 0; i < 5; i++) {
-                if (parseInt(cachedValues[17 + i])>threshold) return true;
+            for (i = 0; i &lt; 5; i++) {
+                if (parseInt(cachedValues[17 + i])&gt;threshold) return true;
             }
             return false;
         } else if (sensor == menus[lang]['sensors'][1]) { //back
-            if (parseInt(cachedValues[22]) > threshold || parseInt(cachedValues[22]) > threshold) {
+            if (parseInt(cachedValues[22]) &gt; threshold || parseInt(cachedValues[22]) &gt; threshold) {
                 return true;
             }
 
             return false;
 
         } else { //ground
-            if (parseInt(cachedValues[15]) > threshold || parseInt(cachedValues[16]) > threshold) {
+            if (parseInt(cachedValues[15]) &gt; threshold || parseInt(cachedValues[16]) &gt; threshold) {
                 return true;
             }
 
@@ -1878,9 +1882,9 @@ motor.right.target = event.args[0] \
     var paramString = window.location.search.replace(/^\?|\/$/g, '');
     var vars = paramString.split("&");
     var lang = 'fr';
-    for (var i = 0; i < vars.length; i++) {
+    for (var i = 0; i &lt; vars.length; i++) {
         var pair = vars[i].split('=');
-        if (pair.length > 1 && pair[0] == 'lang')
+        if (pair.length &gt; 1 && pair[0] == 'lang')
             lang = pair[1];
     }
 
@@ -2108,7 +2112,7 @@ motor.right.target = event.args[0] \
     //Utilities
 
     function clamp(val, min, max) {
-        return val = (val < min ? min : (val > max ? max : val));
+        return val = (val &lt; min ? min : (val &gt; max ? max : val));
     }
 
     /**
@@ -2239,5 +2243,3 @@ motor.right.target = event.args[0] \
 
 
 })({});
-
-/**/
