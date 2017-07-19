@@ -161,6 +161,9 @@
                     console.log("emitted " + eventData)
                 }
               
+              	 if (eventData[0] == "24") {
+              	  setup();
+              	 }
             }
 
 
