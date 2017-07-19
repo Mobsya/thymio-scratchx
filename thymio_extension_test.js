@@ -181,7 +181,6 @@
 		
 		var xmlstring='<!DOCTYPE aesl-source> \
 <network> \
-<!--list of global events--> \
 <event size="4" name="Q_add_motion"/> \
 <event size="1" name="Q_cancel_motion"/> \
 <event size="5" name="Q_motion_added"/> \
@@ -208,11 +207,8 @@
 <event size="1" name="M_motor_right"/> \
 <event size="27" name="R_state_update"/> \
 <event size="0" name="Q_reset"/> \
-<!--list of constants--> \
 <constant value="4" name="QUEUE"/> \
-<!--show keywords state--> \
 <keywords flag="true"/> \
-<!--node thymio-II--> \
 <node nodeId="1" name="thymio-II"> \
 var tmp[9] \
 var Qid[QUEUE]   = [ 0,0,0,0 ] \
