@@ -161,9 +161,9 @@
                     console.log("emitted " + eventData)
                 }
               
-              	 if (eventData[0] == "24" && connected!=1) {
-              	 	connected==1;
-              	  	setup();
+              	 if (eventData[0] == "24" && connected!=0) {
+              	 	disconnect('');
+              	 	setup();
               	 }
             }
 
@@ -179,8 +179,7 @@
         source.addEventListener('error', function(e) {
 
             disconnect('Event stream closed');
-            connected = 0;
-            connect();
+            setup();
 
         });
 
