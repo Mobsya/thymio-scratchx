@@ -21,7 +21,7 @@
     var ASEBAHTTPURL = 'http://localhost:3000/';
     var VMAX = 500;
     var VMIN = -500;
-    var DEBUG = false;
+    var DEBUG = true;
     var LMAX = 32;
     var LMIN = 0;
 
