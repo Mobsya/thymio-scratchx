@@ -27,16 +27,40 @@
 
     var source = null;
     var connected = 0;
+    var aeslLoaded=0;
     var eventCompleteCallback = false;
     var cachedValues = Array();
     var leds = [0, 0, 0];
     var dial = -1;
 
+	setup();
 
-	loadAesl();
-	connect();
 	
+	
+	function setup(){
+            
+   	 $.ajax({
+    	url: ASEBAHTTPURL + 'nodes/thymio-II/',
+        dataType: 'json',
+		async:false,
+        success: function(data) {
+			connected==1;
+			
+        	if (DEBUG) {
+            	console.log("Thymio response");
+            }
+			if(data.events.hasOwnProperty('Q_add_motion')){
+				connect();
+			}else{
+				console.log("manca aesl");
+				loadAesl();
+			}
 
+
+        }
+    	});
+	
+}
     /**
      * Cleanup function when the extension is unloaded
      */
@@ -125,16 +149,18 @@
 
         source.addEventListener('message', function(e) {
 
+			console.log()
             eventData = e.data.split(" ");
-	    connected = 2;
+	    	connected = 2;
+	    	
             if (eventData[0] == "R_state_update") {
                 cachedValues = eventData;
-                //console.log("cached "+cachedValues);
                 
             } else {
                 if (DEBUG) {
                     console.log("emitted " + eventData)
                 }
+              
             }
 
 
@@ -179,41 +205,41 @@
 			console.log("Send Aesl for Thymio");
 		}
 		
-		var xmlstring="<!DOCTYPE aesl-source> \
+		var xmlstring='<!DOCTYPE aesl-source> \
 <network> \
 <!--list of global events--> \
-<event size='4' name='Q_add_motion'/> \
-<event size='1' name='Q_cancel_motion'/> \
-<event size='5' name='Q_motion_added'/> \
-<event size='5' name='Q_motion_cancelled'/> \
-<event size='5' name='Q_motion_started'/> \
-<event size='5' name='Q_motion_ended'/> \
-<event size='1' name='Q_motion_noneleft'/> \
-<event size='3' name='Q_set_odometer'/> \
-<event size='8' name='V_leds_prox_h'/> \
-<event size='8' name='V_leds_circle'/> \
-<event size='3' name='V_leds_top'/> \
-<event size='4' name='V_leds_bottom'/> \
-<event size='2' name='V_leds_prox_v'/> \
-<event size='4' name='V_leds_buttons'/> \
-<event size='1' name='V_leds_rc'/> \
-<event size='2' name='V_leds_temperature'/> \
-<event size='1' name='V_leds_sound'/> \
-<event size='2' name='A_sound_freq'/> \
-<event size='1' name='A_sound_play'/> \
-<event size='1' name='A_sound_system'/> \
-<event size='1' name='A_sound_replay'/> \
-<event size='1' name='A_sound_record'/> \
-<event size='1' name='M_motor_left'/> \
-<event size='1' name='M_motor_right'/> \
-<event size='27' name='R_state_update'/> \
-<event size='0' name='Q_reset'/> \
+<event size="4" name="Q_add_motion"/> \
+<event size="1" name="Q_cancel_motion"/> \
+<event size="5" name="Q_motion_added"/> \
+<event size="5" name="Q_motion_cancelled"/> \
+<event size="5" name="Q_motion_started"/> \
+<event size="5" name="Q_motion_ended"/> \
+<event size="1" name="Q_motion_noneleft"/> \
+<event size="3" name="Q_set_odometer"/> \
+<event size="8" name="V_leds_prox_h"/> \
+<event size="8" name="V_leds_circle"/> \
+<event size="3" name="V_leds_top"/> \
+<event size="4" name="V_leds_bottom"/> \
+<event size="2" name="V_leds_prox_v"/> \
+<event size="4" name="V_leds_buttons"/> \
+<event size="1" name="V_leds_rc"/> \
+<event size="2" name="V_leds_temperature"/> \
+<event size="1" name="V_leds_sound"/> \
+<event size="2" name="A_sound_freq"/> \
+<event size="1" name="A_sound_play"/> \
+<event size="1" name="A_sound_system"/> \
+<event size="1" name="A_sound_replay"/> \
+<event size="1" name="A_sound_record"/> \
+<event size="1" name="M_motor_left"/> \
+<event size="1" name="M_motor_right"/> \
+<event size="27" name="R_state_update"/> \
+<event size="0" name="Q_reset"/> \
 <!--list of constants--> \
-<constant value='4' name='QUEUE'/> \
+<constant value="4" name="QUEUE"/> \
 <!--show keywords state--> \
-<keywords flag='true'/> \
+<keywords flag="true"/> \
 <!--node thymio-II--> \
-<node nodeId='1' name='thymio-II'> \
+<node nodeId="1" name="thymio-II"> \
 var tmp[9] \
 var Qid[QUEUE]   = [ 0,0,0,0 ] \
 var Qtime[QUEUE] = [ 0,0,0,0 ] \
@@ -247,7 +273,7 @@ if Qtime[Qpc] > 0 then \
 	emit Q_motion_started([Qid[Qpc], Qtime[Qpc], QspL[Qpc], QspR[Qpc], Qpc]) \
 	Qtime[Qpc] = 0 - Qtime[Qpc] \
 end \
-if Qtime[Qpc] < 0 then \
+if Qtime[Qpc] &lt; 0 then \
 	motor.left.target = QspL[Qpc] \
 	motor.right.target = QspR[Qpc] \
 	Qtime[Qpc] += 1 \
@@ -319,17 +345,17 @@ call math.clamp(distance.back,125-distance.back,0,125) \
 call math.dot(angle.front, prox.horizontal,[4,3,0,-3,-4,0,0],9) \
 call math.dot(angle.back, prox.horizontal,[0,0,0,0,0,-4,4],9) \
 call math.dot(angle.ground, prox.ground.delta,[4,-4],7) \
-R_state = [	((((acc[0]/2)+16)%32)<<10) + ((((acc[1]/2)+16)%32)<<5) + (((acc[2]/2)+16)%32), \
-			(((mic.intensity/mic.threshold)%8)<<8) + \
-				(0<<5) + \
-				(button.backward<<4) + \
-				(button.center<<3) + \
-				(button.forward<<2) + \
-				(button.left<<1) + \
+R_state = [	((((acc[0]/2)+16)%32)&lt;&lt;10) + ((((acc[1]/2)+16)%32)&lt;&lt;5) + (((acc[2]/2)+16)%32), \
+			(((mic.intensity/mic.threshold)%8)&lt;&lt;8) + \
+				(0&lt;&lt;5) + \
+				(button.backward&lt;&lt;4) + \
+				(button.center&lt;&lt;3) + \
+				(button.forward&lt;&lt;2) + \
+				(button.left&lt;&lt;1) + \
 				button.right, \
-			((angle.ground+90) << 8) + (angle.back+90), \
+			((angle.ground+90) &lt;&lt; 8) + (angle.back+90), \
 			angle.front, \
-			(distance.back<<8) + distance.front, \
+			(distance.back&lt;&lt;8) + distance.front, \
 			motor.left.target, \
 			motor.right.target, \
 			motor.left.speed, \
@@ -407,14 +433,14 @@ onevent M_motor_right \
 motor.right.target = event.args[0] \
  \
 </node> \
-</network>";
+</network>';
 
 		$.ajax({
   			url: 'http://localhost:3000/nodes/thymio-II',
   			type: 'PUT',
   			data: xmlstring,
   			success: function(data) {
-  				connect();
+  				setup();
     	 
   			}
 		});
