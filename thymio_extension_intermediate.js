@@ -1922,8 +1922,8 @@ motor.right.target = event.args[0] \
             [" ", "leds temperature %n %n", "V_leds_temperature", 32, 8],
 	    ["h", "button %m.buttons", "button","center"]
 		
-           /* ["b", "touching %m.sensors", "touching", "devant"],
-            ["b", "touching %m.sensors %n", "touching_threshold", "devant"],
+           /* ["b", "touching %m.sensors", "touching", "front"],
+            ["b", "touching %m.sensors %n", "touching_threshold", "front"],
             ["r", "proximity sensor %m.proxsensors", "proximity2", "front far left"],
             ["b", "sound detected", "sound_detected"],
             [" ", "leds next dial %m.leftright", "scratch_next_dial", "left"],
