@@ -351,6 +351,14 @@ div#activities {
     transition: ease all 0.2s;
 }
 
+.scratch3 {
+    background:#ff0045;color:white;
+}
+
+.scratch3 span {
+    font-size:12px;font-weight:bold;
+}
+
 .scratchlink {
     line-height: 164px
 }
